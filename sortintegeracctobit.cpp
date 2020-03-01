@@ -34,12 +34,7 @@ int main(){
 	for(int i=0;i<n;i++){
 		cin>>arr[i];
 	}
-	stability(arr,n);
-	vector<int> a;
-	for(int i=0;i<a.size();i++){
-		a.push_back(arr[i]);
-	}
-	for(auto it=a.begin();it!=a.end();it++){
-			cout<<*it<<" ";
-	}
+	
+	
+	
 }

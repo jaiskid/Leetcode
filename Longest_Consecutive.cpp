@@ -13,6 +13,7 @@ int longestconsecutivesubsequence(vector<int> &nums){
 	if(!hash[i]){
 	hash[i]=1;
 		int leftmost{hash[i-1]},rightmost{hash[i+1]};
+		
 		hash[i-leftmost]=hash[i+rightmost]=1+leftmost+rightmost;
 		ans=max(ans,1+leftmost+rightmost);
 	}

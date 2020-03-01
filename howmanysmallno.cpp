@@ -22,4 +22,4 @@ int main() {
       cin>>arr[i];
   }
   greatest(arr,n);
-}
+} 
