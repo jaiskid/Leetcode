@@ -19,7 +19,7 @@ int largest(vector<int>&height) {
 			auto left = increasing_height.empty() ? -1 : increasing_height.top();
 			max_area = max(max_area, h * (i - left - 1));
 		}
-	}
+	}+
 
 	return max_area;
 }
