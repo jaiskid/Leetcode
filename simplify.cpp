@@ -2,6 +2,7 @@
 using namespace std;
 string simplfypath(string path) {
 	string ret, tmp;
+	
 	vector<string> Stack;
 	for (istringstream iss(path); getline(iss, tmp, '/');) {
 		if (tmp == ".." and !Stack.empty())
