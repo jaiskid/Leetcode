@@ -1,0 +1,131 @@
+ Two  sum 
+ Time and space o(n)
+ vector<int> twoSum(vector<int>& nums, int target) {
+      unordered_map<int,int> lookup;
+        for(int i=0;i<nums.size();++i){
+            if(lookup.count(target-nums[i])){
+                return {lookup[target-nums[i]],i};
+            }
+            lookup[nums[i]]=i;
+                               
+        }
+        return {};
+    }
+
+container with most water
+time o(n) and o(1)
+int maxArea(vector<int>& height) {
+        int max_area=0,i=0,j=height.size()-1;
+        while(i<j){
+            max_area=max(max_area,min(height[i],height[j])*(j-i));
+            if(height[i]<height[j])
+                ++i;
+            else if(height[i]>height[j])
+                --j;
+            else
+                ++i,--j;
+        }
+        return max_area;
+}
+
+Rainwater trapping
+time o(n) and space o(1)
+
+ int trap(vector<int>& height) {
+        if(height.empty())
+            return 0;
+        int i=0,j=height.size()-1;
+        int trap=0;
+        int left_height=height[0];
+        int right_height=height[height.size()-1];
+        
+        while(i<j){
+            if(left_height<right_height){
+                i++;
+                trap+=max(0,left_height-height[i]);
+                left_height=max(left_height,height[i]);
+            }
+            else{
+                j--;
+                trap+=max(0,right_height-height[j]);
+                right_height=max(right_height,height[j]);
+            }
+        }
+        return trap;
+    }
+
+Maximum subarray
+time and space o(n) and o(1)
+int maxSubArray(vector<int>& nums) {
+        int curr=INT_MIN;
+        int result=INT_MIN;
+        for(const auto &x : nums){
+            curr=(curr==INT_MIN)? x : max(curr+x,x);
+            result=max(result,curr);
+        }
+        return result;
+}
+
+
+3 Sum time o(n2) space o(1)
+vector<vector<int>> threeSum(vector<int> &nums) {
+        vector<vector<int>> ans;
+        const int target = 0;
+
+        // Make nums in increasing order. Time: O(nlogn)
+        sort(nums.begin(), nums.end());
+
+        for (int i = 0; i < static_cast<int>(nums.size()) - 2; ++i) {
+            if (i == 0 || nums[i] != nums[i - 1]) {  // Skip duplicated.
+                for (int j = i + 1, k = nums.size() - 1; j < k; ) {  // Time: O(n) for each i.
+                    if (j - 1 > i  && nums[j] == nums[j - 1]) {  // Skip duplicated.
+                        ++j;
+                    } else if (k + 1 < nums.size() && nums[k] == nums[k + 1]) {  // Skip duplicated.
+                        --k;
+                    } else {
+                        const auto sum = nums[i] + nums[j] + nums[k];
+                        if (sum > target) {  // Should decrease sum.
+                            --k;
+                        } else if (sum < target) {  // Should increase sum.
+                            ++j;
+                        } else {
+                            ans.push_back({nums[i], nums[j], nums[k]});
+                            ++j, --k;
+                        }
+                    }
+                }
+            }
+        }
+
+        return ans;
+    }
+
+Product of array except self
+time o(n) and space  O(1)
+ vector<int> productExceptSelf(vector<int>& nums) {
+        if(nums.empty())
+            return {};
+        vector<int> left_product(nums.size());
+        left_product[0]=1;
+       for(int i=1;i<nums.size();++i){
+           left_product[i]=left_product[i-1]*nums[i-1];
+       }
+        int right_product=1;
+        for(int i=static_cast<int>(nums.size())-2;i>=0;--i){
+            right_product*=nums[i+1];
+            left_product[i]=left_product[i]*right_product;
+        }
+        return left_product;
+    }
+best time to buy stock
+Time and space is o(n) ,constant
+int maxProfit(vector<int>& prices) {
+       int maxprofit=0;
+            int Minprices=INT_MAX;
+            for(int i=0;i<prices.size();i++){
+                Minprices=min(prices[i],Minprices);
+                if(prices[i]-Minprices>maxprofit)
+                    maxprofit=prices[i]-Minprices;
+            }
+        return maxprofit;
+    }
